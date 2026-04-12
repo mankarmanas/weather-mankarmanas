@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather App</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Weather</h1>
+    <p class="subtitle">Enter a city name and get the current weather. For specific locations, try "City, Country" (e.g., "Bayonne, US" or "London, UK")</p>
+
+    <form id="weatherForm">
+      <input id="cityInput" type="text" name="city" placeholder="Enter city name or City, Country" required />
+      <button type="submit">Get Weather</button>
+    </form>
+
+    <div id="errorMessage" class="error hidden" role="alert"></div>
+
+    <div id="weatherCard" class="weather-card hidden">
+      <div class="weather-row">
+        <div>
+          <h2 id="cityName">City, Country</h2>
+          <p id="weatherDescription">Weather description</p>
+        </div>
+        <div>
+          <strong id="temperature">0°C</strong>
+        </div>
+      </div>
+      <div class="weather-details">
+        <span><strong>Feels like:</strong> <span id="feelsLike">0°C</span></span>
+        <span><strong>Humidity:</strong> <span id="humidity">0%</span></span>
+        <span><strong>Wind:</strong> <span id="windSpeed">0 m/s</span></span>
+      </div>
+    </div>
+
+    <div class="footer">✨ Get real-time weather updates instantly</div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
