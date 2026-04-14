@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException
-from fastapi.responses import FileResponse, JSONResponse
+from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 import requests
 
@@ -40,8 +40,3 @@ async def weather_api(city: str):
         return JSONResponse(status_code=500, content={'error': 'Request timed out. Please try again.'})
     except Exception as e:
         return JSONResponse(status_code=500, content={'error': 'Unable to fetch weather data. Please try again later.'})
-
-@app.get('/')
-async def root():
-    index_path = os.path.join(os.path.dirname(__file__), '..', 'index.html')
-    return FileResponse(index_path)
