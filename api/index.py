@@ -1,7 +1,6 @@
 import os
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException
-from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 import requests
@@ -44,4 +43,5 @@ async def weather_api(city: str):
 
 @app.get('/')
 async def root():
-    return FileResponse('../index.html')
+    index_path = os.path.join(os.path.dirname(__file__), '..', 'index.html')
+    return FileResponse(index_path)
