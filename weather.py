@@ -19,10 +19,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get('/')
-async def root():
-    return FileResponse('index.html')
-
 @app.get('/weather')
 async def weather_api(city: str):
     if not city or not city.strip():
@@ -46,4 +42,8 @@ async def weather_api(city: str):
     except Exception as e:
         return JSONResponse(status_code=500, content={'error': 'Unable to fetch weather data. Please try again later.'})
 
-app.mount('/', StaticFiles(directory='.', html=False), name='static')
+app.mount('/', StaticFiles(directory='.', html=True), name='static')
+
+@app.get('/')
+async def root():
+    return FileResponse('index.html')
