@@ -3,40 +3,76 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Weather App</title>
+  <title>Weather</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="container">
-    <h1>Weather</h1>
-    <p class="subtitle">Enter a city name and get the current weather. For specific locations, try "City, Country" (e.g., "Bayonne, US" or "London, UK")</p>
-
-    <form id="weatherForm">
-      <input id="cityInput" type="text" name="city" placeholder="Enter city name or City, Country" required />
-      <button type="submit">Get Weather</button>
-    </form>
-
-    <div id="errorMessage" class="error hidden" role="alert"></div>
-
-    <div id="weatherCard" class="weather-card hidden">
-      <div class="weather-row">
-        <div>
-          <h2 id="cityName">City, Country</h2>
-          <p id="weatherDescription">Weather description</p>
-        </div>
-        <div>
-          <strong id="temperature">0°C</strong>
-        </div>
-      </div>
-      <div class="weather-details">
-        <span><strong>Feels like:</strong> <span id="feelsLike">0°C</span></span>
-        <span><strong>Humidity:</strong> <span id="humidity">0%</span></span>
-        <span><strong>Wind:</strong> <span id="windSpeed">0 m/s</span></span>
-      </div>
+  <header class="navbar">
+    <div class="navbar-content">
+      <h1 class="logo">Weather</h1>
     </div>
+  </header>
 
-    <div class="footer">✨ Get real-time weather updates instantly</div>
-  </div>
+  <main class="container">
+    <section class="hero">
+      <h1 class="main-title">Check the Weather</h1>
+      <p class="subtitle">Real-time weather information for any location worldwide</p>
+    </section>
+
+    <section class="search-section">
+      <form id="weatherForm" class="search-form">
+        <div class="input-wrapper">
+          <input 
+            id="cityInput" 
+            type="text" 
+            name="city" 
+            placeholder="Enter city name or City, Country" 
+            required 
+            aria-label="City search input"
+          />
+          <button type="submit" class="search-btn">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="8" cy="8" r="6"></circle>
+              <path d="m12 12 4 4"></path>
+            </svg>
+          </button>
+        </div>
+      </form>
+
+      <div id="errorMessage" class="error-message hidden" role="alert"></div>
+
+      <div id="weatherCard" class="weather-card hidden">
+        <div class="weather-header">
+          <div class="weather-main">
+            <h2 id="cityName" class="city-name">City, Country</h2>
+            <p id="weatherDescription" class="weather-desc">Weather description</p>
+          </div>
+          <div class="temperature-display">
+            <span id="temperature" class="temp-value">0°C</span>
+          </div>
+        </div>
+
+        <div class="weather-grid">
+          <div class="weather-stat">
+            <span class="stat-label">Feels Like</span>
+            <span class="stat-value" id="feelsLike">0°C</span>
+          </div>
+          <div class="weather-stat">
+            <span class="stat-label">Humidity</span>
+            <span class="stat-value" id="humidity">0%</span>
+          </div>
+          <div class="weather-stat">
+            <span class="stat-label">Wind Speed</span>
+            <span class="stat-value" id="windSpeed">0 km/h</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Powered by OpenWeatherMap API</p>
+  </footer>
 
   <script src="script.js"></script>
 </body>

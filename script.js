@@ -39,6 +39,7 @@ function showWeather(data) {
     humidity.textContent = `${data.main.humidity}%`;
     windSpeed.textContent = `${(data.wind.speed * 3.6).toFixed(1)} km/h`;
     weatherCard.classList.remove('hidden');
+    hideError();
   } catch (e) {
     showError('Error displaying weather data. Please try again.');
   }
