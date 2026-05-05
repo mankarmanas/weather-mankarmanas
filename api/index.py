@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
+from mangum import Mangum
 import requests
 
 load_dotenv()
@@ -40,3 +41,5 @@ async def weather_api(city: str):
         return JSONResponse(status_code=500, content={'error': 'Request timed out. Please try again.'})
     except Exception:
         return JSONResponse(status_code=500, content={'error': 'Unable to fetch weather data. Please try again later.'})
+
+handler = Mangum(app)
