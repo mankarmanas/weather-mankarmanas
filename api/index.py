@@ -1,7 +1,8 @@
 import os
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException
-from fastapi.responses import JSONResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse, JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 import requests
 
@@ -40,4 +41,11 @@ async def weather_api(city: str):
         return JSONResponse(status_code=500, content={'error': 'Request timed out. Please try again.'})
     except Exception:
         return JSONResponse(status_code=500, content={'error': 'Unable to fetch weather data. Please try again later.'})
+
+# Serve static files from parent directory
+app.mount('/', StaticFiles(directory='..', html=True), name='static')
+
+@app.get('/')
+async def root():
+    return FileResponse('../index.html')
 
