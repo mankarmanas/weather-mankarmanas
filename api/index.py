@@ -1,7 +1,7 @@
 import os
+from pathlib import Path
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException
-from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 import requests
@@ -18,6 +18,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Get the parent directory (project root)
+BASE_DIR = Path(__file__).parent.parent
 
 @app.get('/weather')
 async def weather_api(city: str):
@@ -42,10 +45,20 @@ async def weather_api(city: str):
     except Exception:
         return JSONResponse(status_code=500, content={'error': 'Unable to fetch weather data. Please try again later.'})
 
-# Serve static files from parent directory
-app.mount('/', StaticFiles(directory='..', html=True), name='static')
+@app.get('/styles.css')
+async def get_styles():
+    return FileResponse(BASE_DIR / 'styles.css', media_type='text/css')
+
+@app.get('/script.js')
+async def get_script():
+    return FileResponse(BASE_DIR / 'script.js', media_type='application/javascript')
 
 @app.get('/')
 async def root():
-    return FileResponse('../index.html')
+    return FileResponse(BASE_DIR / 'index.html', media_type='text/html')
+
+@app.get('/{path:path}')
+async def fallback(path: str):
+    # Serve index.html for any unmatched routes (SPA fallback)
+    return FileResponse(BASE_DIR / 'index.html', media_type='text/html')
 
